@@ -62,6 +62,17 @@ export default Kapsule({
 
         hierData.descendants().forEach((d, i) => d.id = i); // Mark each node with a unique ID
 
+        //update the focused node - assumes the name is unique!
+        var fnode = this.focusOnNode();
+        var me = this; //TODO: must be a better way than this?
+        if (fnode != null) {
+            hierData.descendants().forEach(function (d, i) {
+                var temp = accessorFn(state.label)(d.data);
+                if (accessorFn(state.label)(d.data) == accessorFn(state.label)(fnode.data)) {
+                    me.focusOnNode(d);
+                }
+            });
+
         state.layoutData = hierData.descendants();
       }
     }
