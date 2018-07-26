@@ -72,7 +72,7 @@ export default Kapsule({
                     me.focusOnNode(d);
                 }
             });
-
+        }
         state.layoutData = hierData.descendants();
       }
     }
@@ -189,6 +189,9 @@ export default Kapsule({
 
     const label = newSlice.append('text')
         .attr('class', 'path-label');
+    //IE11 does not go well with multiple textpaths per text
+    const label2 = newSlice.append('text')
+        .attr('class', 'path-label');
 
     // Add white contour
     label.append('textPath')
@@ -196,7 +199,7 @@ export default Kapsule({
       .attr('startOffset','50%')
       .attr('xlink:href', d => `#hidden-arc-${state.chartId}-${d.id}` );
 
-    label.append('textPath')
+    label2.append('textPath')
       .attr('startOffset','50%')
       .attr('xlink:href', d => `#hidden-arc-${state.chartId}-${d.id}` );
 
